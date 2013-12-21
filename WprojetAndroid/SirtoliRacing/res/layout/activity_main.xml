@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/button_SirtoliRace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_RaphParadise"
+        android:layout_alignRight="@+id/button_RaphParadise"
+        android:layout_below="@+id/button_RaphParadise"
+        android:layout_marginTop="31dp"
+        android:onClick="afficherScore"
+        android:text="Sirtoli Race" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Consulting score"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="21dp"
+        android:text="Choose your circuit" />
+
+    <Button
+        android:id="@+id/button_RaphParadise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:onClick="afficherScore"
+        android:text="Raph paradise" />
+     <Button
+        android:id="@+id/button_Oli_track"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_SirtoliRace"
+        android:layout_alignRight="@+id/button_SirtoliRace"
+        android:layout_below="@+id/button_SirtoliRace"
+        android:onClick="afficherScore"
+        android:layout_marginTop="22dp"
+        android:text="Oli Track" />
+
+     <Button
+         android:id="@+id/button_Zig_Zag"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/button_Oli_track"
+         android:layout_alignRight="@+id/button_Oli_track"
+         android:layout_below="@+id/button_Oli_track"
+         android:layout_marginTop="20dp"
+         android:onClick="afficherScore"
+         android:text="Zig Zag" />
+
+</RelativeLayout>
