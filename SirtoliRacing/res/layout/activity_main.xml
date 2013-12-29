@@ -8,17 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/button_SirtoliRace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_RaphParadise"
-        android:layout_alignRight="@+id/button_RaphParadise"
-        android:layout_below="@+id/button_RaphParadise"
-        android:layout_marginTop="31dp"
-        android:onClick="afficherScore"
-        android:text="Sirtoli Race" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -37,35 +26,64 @@
         android:layout_marginTop="21dp"
         android:text="Choose your circuit" />
 
-    <Button
-        android:id="@+id/button_RaphParadise"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:onClick="afficherScore"
-        android:text="Raph paradise" />
-     <Button
-        android:id="@+id/button_Oli_track"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_SirtoliRace"
-        android:layout_alignRight="@+id/button_SirtoliRace"
-        android:layout_below="@+id/button_SirtoliRace"
-        android:onClick="afficherScore"
-        android:layout_marginTop="22dp"
-        android:text="Oli Track" />
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="10.51" >
 
-     <Button
-         android:id="@+id/button_Zig_Zag"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/button_Oli_track"
-         android:layout_alignRight="@+id/button_Oli_track"
-         android:layout_below="@+id/button_Oli_track"
-         android:layout_marginTop="20dp"
-         android:onClick="afficherScore"
-         android:text="Zig Zag" />
+        <Button
+            android:id="@+id/button_Previous"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.51"
+            android:onClick="afficherPrecedent"
+            android:text="Previous" />
+
+        <Button
+            android:id="@+id/button_Next"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_weight="10.51"
+            android:onClick="afficherSuivant"
+            android:text="Next" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button_Track1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.51"
+            android:onClick="afficherScore"
+            android:text="Bouton1" />
+
+        <Button
+            android:id="@+id/button_Track2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.51"
+            android:onClick="afficherScore"
+            android:text="bouton2" />
+
+        <Button
+            android:id="@+id/button_Track3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.51"
+            android:onClick="afficherScore"
+            android:text="Button3" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -9,64 +9,73 @@
     tools:context=".Score" >
 
     <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView_Titre" 
-        
-
-        android:stretchColumns="2">
+        android:layout_below="@+id/textView_Titre"
+        android:stretchColumns="2" >
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-            
+
             <TextView
-                 android:id="@+id/textView_name1"
+                android:id="@+id/textView_name1"
+                android:layout_width="wrap_content"
                 android:layout_column="1"
                 android:layout_gravity="left"
-                android:padding="3dip"
                 android:layout_margin="1px"
+                android:padding="3dip"
+                android:maxLength="10"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time1"
+                android:layout_width="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:layout_margin="1px"
                 android:padding="3dip"
+                android:maxLength="30"
                 android:text="time" />
-    							
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name2"
+
+            <TextView
+                android:id="@+id/textView_name2"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time2"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
+                
                 android:text="time" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name3"
+
+            <TextView
+                android:id="@+id/textView_name3"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
@@ -74,6 +83,7 @@
 
             <TextView
                 android:id="@+id/textView_time3"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
@@ -82,17 +92,21 @@
 
         <TableRow
             android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name4"
+
+            <TextView
+                android:id="@+id/textView_name4"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time4"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
@@ -101,39 +115,46 @@
 
         <TableRow
             android:id="@+id/tableRow5"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent" >
-             <TextView
-                 android:id="@+id/textView_name5"
-                 android:layout_width="50dp"
-                 android:maxLines="1"
+
+            <TextView
+                android:id="@+id/textView_name5"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
+                android:maxLines="1"
                 android:padding="3dip"
-               
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time5"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="time" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name6"
+
+            <TextView
+                android:id="@+id/textView_name6"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time6"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
@@ -142,17 +163,21 @@
 
         <TableRow
             android:id="@+id/tableRow7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name7"
+
+            <TextView
+                android:id="@+id/textView_name7"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time7"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
@@ -161,17 +186,21 @@
 
         <TableRow
             android:id="@+id/tableRow8"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name8"
+
+            <TextView
+                android:id="@+id/textView_name8"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time8"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
@@ -180,17 +209,21 @@
 
         <TableRow
             android:id="@+id/tableRow9"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name9"
+
+            <TextView
+                android:id="@+id/textView_name9"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time9"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
@@ -199,23 +232,26 @@
 
         <TableRow
             android:id="@+id/tableRow10"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <TextView
-                 android:id="@+id/textView_name10"
+
+            <TextView
+                android:id="@+id/textView_name10"
+                android:layout_width="match_parent"
                 android:layout_column="1"
                 android:layout_gravity="left"
                 android:padding="3dip"
+                 android:maxLength="30"
                 android:text="name" />
 
             <TextView
                 android:id="@+id/textView_time10"
+                android:layout_width="match_parent"
                 android:layout_column="2"
                 android:layout_gravity="right"
                 android:padding="3dip"
                 android:text="time" />
         </TableRow>
-
     </TableLayout>
 
     <TextView
@@ -227,5 +263,23 @@
         android:layout_marginTop="14dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tableLayout1"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="45dp"
+        android:text="Suivant" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:text="Button" />
 
 </RelativeLayout>
