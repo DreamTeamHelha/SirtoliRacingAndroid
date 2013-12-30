@@ -19,26 +19,30 @@ import com.model.sirtoliracing.Joueur;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Score extends Activity {
-
+	
 	private List<Joueur>listeJoueurs= new ArrayList<Joueur>(); 
 	private TextView raceName;
 	private TextView nameTab[]=new TextView[10],timeTab[]=new TextView[10];
-	
+	private ArrayList<String>listeTrack;
+	private int indice;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_score);
-		
+		listeTrack=new ArrayList<String>();
 	
 		Bundle extra = getIntent().getExtras();
         String variable = extra.getString("url_track");
         String nameTrack= extra.getString("name_track");
+        listeTrack= extra.getStringArrayList("Track_Array");
+        indice=extra.getInt("Indice_Current");
     	RecoverInformation recover= new RecoverInformation();
 		recover.execute(variable);
 		raceName=(TextView)findViewById(R.id.textView_Titre);
@@ -76,6 +80,31 @@ public class Score extends Activity {
 		getMenuInflater().inflate(R.menu.score, menu);
 		return true;
 	}
+	
+	
+	
+	
+	
+	
+	
+	public String nextAction(View view)
+	{
+		indice++;
+		if(indice==listeTrack.size())
+		{
+			indice=0;
+		}
+		String url_track="";
+		String name_Track=(String) listeTrack.get(indice);		
+		url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;	
+		raceName.setText(Integer.toString(indice));
+		
+		RecoverInformation recoverInformation= new RecoverInformation();
+		recoverInformation.execute(url_track);
+		
+		return url_track;
+	}
+	
 	
 	private class RecoverInformation extends AsyncTask<String, Void,String> {
 

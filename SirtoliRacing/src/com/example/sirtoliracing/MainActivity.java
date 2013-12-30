@@ -63,30 +63,40 @@ public class MainActivity extends Activity {
 	
 	public void afficherScore(View view)
 	{
-		Log.v("NomButton", (String) listeButtons.get(0).getText());
+		
 		Intent intent= new Intent(this,Score.class);
+		int indice;
 		switch (view.getId()) {
 		
 		case R.id.button_Track1:
 			name_Track=(String) listeButtons.get(0).getText();
 			intent.putExtra("name_track", name_Track);
 			name_Track= name_Track.replaceAll(" ", "_");
+			indice=recoverTrack(name_Track);
 			url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;
-			intent.putExtra("url_track", url_track);
+			intent.putExtra("url_track", url_track);			
+			intent.putExtra("Track_Array", listNametracks);
+			intent.putExtra("Indice_Current", indice);			
 			break;
 		case R.id.button_Track2:
 			name_Track=(String) listeButtons.get(1).getText();
 			intent.putExtra("name_track", name_Track);
 			name_Track= name_Track.replaceAll(" ", "_");
+			indice=recoverTrack(name_Track);
 			url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;
 			intent.putExtra("url_track", url_track);
+			intent.putExtra("Track_Array", listNametracks);
+			intent.putExtra("Indice_Current", indice);
 			break;
 		case R.id.button_Track3:
 			name_Track=(String) listeButtons.get(2).getText();
 			intent.putExtra("name_track", name_Track);
 			name_Track= name_Track.replaceAll(" ", "_");
+			indice=recoverTrack(name_Track);
 			url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;
 			intent.putExtra("url_track", url_track);
+			intent.putExtra("Track_Array", listNametracks);
+			intent.putExtra("Indice_Current", indice);
 			break;
 		default:
 			break;
@@ -182,6 +192,12 @@ public class MainActivity extends Activity {
 			}
 		}*/
 	}
+	
+	public int recoverTrack(String name_track)
+	{
+		return listNametracks.indexOf(name_track);
+	}
+	
 	private class RecoverTrack extends AsyncTask<Void, Void, String>
 	{
 		

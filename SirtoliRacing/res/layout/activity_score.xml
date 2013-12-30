@@ -12,7 +12,6 @@
         android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView_Titre"
@@ -252,6 +251,7 @@
                 android:padding="3dip"
                 android:text="time" />
         </TableRow>
+
     </TableLayout>
 
     <TextView
@@ -265,21 +265,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_NextTrack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tableLayout1"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/tableLayout1"
+        android:layout_marginBottom="54dp"
+        android:onClick="nextAction"
         android:text="Suivant" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@+id/button_NextTrack"
+        android:layout_alignLeft="@+id/tableLayout1"
         android:text="Button" />
 
 </RelativeLayout>
