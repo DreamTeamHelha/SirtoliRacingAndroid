@@ -280,6 +280,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button_NextTrack"
         android:layout_alignLeft="@+id/tableLayout1"
-        android:text="Button" />
+        android:onClick="previousAction"
+        android:text="Previous" />
 
 </RelativeLayout>

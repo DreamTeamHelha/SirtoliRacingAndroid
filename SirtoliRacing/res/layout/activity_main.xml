@@ -27,6 +27,7 @@
         android:text="Choose your circuit" />
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
@@ -51,7 +52,6 @@
             android:layout_weight="10.51"
             android:onClick="afficherSuivant"
             android:text="Next" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -85,5 +85,15 @@
             android:onClick="afficherScore"
             android:text="Button3" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_marginBottom="32dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:onClick="rechercherRaceVocal"
+        android:src="@android:drawable/ic_btn_speak_now" />
 
 </RelativeLayout>

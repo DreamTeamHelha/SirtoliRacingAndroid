@@ -18,6 +18,7 @@ import com.model.sirtoliracing.Joueur;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RecoverySystem;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -26,29 +27,31 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Score extends Activity {
-	
+
 	private List<Joueur>listeJoueurs= new ArrayList<Joueur>(); 
 	private TextView raceName;
 	private TextView nameTab[]=new TextView[10],timeTab[]=new TextView[10];
 	private ArrayList<String>listeTrack;
 	private int indice;
+	private RecoverInformation recover=null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_score);
 		listeTrack=new ArrayList<String>();
-	
+
 		Bundle extra = getIntent().getExtras();
-        String variable = extra.getString("url_track");
-        String nameTrack= extra.getString("name_track");
-        listeTrack= extra.getStringArrayList("Track_Array");
-        indice=extra.getInt("Indice_Current");
-    	RecoverInformation recover= new RecoverInformation();
+		String variable = extra.getString("url_track");
+		String nameTrack= extra.getString("name_track");
+		listeTrack= extra.getStringArrayList("Track_Array");
+		indice=extra.getInt("Indice_Current");
+		recover= new RecoverInformation();
 		recover.execute(variable);
 		raceName=(TextView)findViewById(R.id.textView_Titre);
 		raceName.setText(nameTrack);
-	
-		
+
+
 		nameTab[0]=(TextView)findViewById(R.id.textView_name1);
 		nameTab[1]=(TextView)findViewById(R.id.textView_name2);
 		nameTab[2]=(TextView)findViewById(R.id.textView_name3);
@@ -59,7 +62,7 @@ public class Score extends Activity {
 		nameTab[7]=(TextView)findViewById(R.id.textView_name8);
 		nameTab[8]=(TextView)findViewById(R.id.textView_name9);
 		nameTab[9]=(TextView)findViewById(R.id.textView_name10);
-		
+
 		timeTab[0]=(TextView)findViewById(R.id.textView_time1);
 		timeTab[1]=(TextView)findViewById(R.id.textView_time2);		
 		timeTab[2]=(TextView)findViewById(R.id.textView_time3);	
@@ -70,9 +73,9 @@ public class Score extends Activity {
 		timeTab[7]=(TextView)findViewById(R.id.textView_time8);	
 		timeTab[8]=(TextView)findViewById(R.id.textView_time9);	
 		timeTab[9]=(TextView)findViewById(R.id.textView_time10);	
-        
+
 	}
-	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,15 +83,16 @@ public class Score extends Activity {
 		getMenuInflater().inflate(R.menu.score, menu);
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	public String nextAction(View view)
+
+
+
+
+
+
+
+	public void nextAction(View view)
 	{
+		recover=null;
 		indice++;
 		if(indice==listeTrack.size())
 		{
@@ -97,106 +101,142 @@ public class Score extends Activity {
 		String url_track="";
 		String name_Track=(String) listeTrack.get(indice);		
 		url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;	
-		raceName.setText(Integer.toString(indice));
-		
-		RecoverInformation recoverInformation= new RecoverInformation();
-		recoverInformation.execute(url_track);
-		
-		return url_track;
+		raceName.setText(name_Track);
+
+
+		recover= new RecoverInformation();
+
+		recover.execute(url_track);
+
 	}
-	
-	
+	public void previousAction(View view)
+	{
+		recover=null;
+		indice--;
+		if(indice<0)
+		{
+			indice=listeTrack.size()-1;
+		}
+		String url_track="";
+		String name_Track=(String) listeTrack.get(indice);		
+		url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;	
+		raceName.setText(name_Track);
+
+
+		recover= new RecoverInformation();
+
+		recover.execute(url_track);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private class RecoverInformation extends AsyncTask<String, Void,String> {
 
-	
-	
-	@Override
-	protected void onPreExecute() {
-	// TODO Stub de la méthode généré automatiquement
-	super.onPreExecute();
-	}
-	
-	@Override
-	protected void onPostExecute(String result) {
-	// TODO Stub de la méthode généré automatiquement
-		//Log.v("test",result);//verification check param ok
-		try {
-			
-			JSONArray array = new JSONArray(result);
-			
-			for(int i = 0 ; i < array.length() ; i++){
-				JSONObject jsonobj =  array.getJSONObject(i);
-				String name= (String)jsonobj.get("Name");
-				int time=jsonobj.getInt("Time");				
-				Joueur j= new Joueur(name, time);
-				listeJoueurs.add(j);
-				
+
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Stub de la méthode généré automatiquement
+			super.onPreExecute();
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Stub de la méthode généré automatiquement
+			Log.v("test",result);//verification check param ok
+			try {
+				listeJoueurs.clear();
+				JSONArray array = new JSONArray(result);
+
+				for(int i = 0 ; i < array.length() ; i++){
+					JSONObject jsonobj =  array.getJSONObject(i);
+					String name= (String)jsonobj.get("Name");
+					int time=jsonobj.getInt("Time");				
+					Joueur j= new Joueur(name, time);
+					listeJoueurs.add(j);
+
+				}
+				Collections.sort(listeJoueurs);
+				String timing;
+				for(int i=0;i<10;i++)
+				{
+					nameTab[i].setText(listeJoueurs.get(i).getName());
+					timing=calculTime(listeJoueurs.get(i).getScore());
+					timeTab[i].setText(timing);
+				}
+
 			}
-			Collections.sort(listeJoueurs);
-			String timing;
-			for(int i=0;i<10;i++)
+			catch(Exception e)
 			{
-				nameTab[i].setText(listeJoueurs.get(i).getName());
-				timing=calculTime(listeJoueurs.get(i).getScore());
-				timeTab[i].setText(timing);
+				e.printStackTrace();
 			}
-			
+
+			super.onPostExecute(result);
 		}
-		catch(Exception e)
+
+
+
+		String response=null;
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			Log.v("test",params[0]);//verification check param ok
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(params[0]);
+
+			HttpResponse httpResponse;
+			try {
+				httpResponse = httpClient.execute(httpGet);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				response = EntityUtils.toString(httpEntity);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Log.v("test",response);//verification check param ok
+
+			return response;
+		}
+		private String calculTime(int time)
 		{
-			e.printStackTrace();
+
+			int min=time/60000;
+			int sec=(time-(min*60000))/1000;
+			int mili=(time-(sec*1000)-(min*60000))/10;
+			//int milisec=
+
+
+			return min+"min"+sec+"sec"+mili;
 		}
-		
-	super.onPostExecute(result);
-	}
 
-	
-	
-	String response=null;
-	
-	@Override
-	protected String doInBackground(String... params) {
-		
-		//Log.v("test",params[0]);//verification check param ok
-		DefaultHttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(params[0]);
-		
-		HttpResponse httpResponse;
-		try {
-			httpResponse = httpClient.execute(httpGet);
-			HttpEntity httpEntity = httpResponse.getEntity();
-			response = EntityUtils.toString(httpEntity);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//Log.v("test",response);//verification check param ok
 
-		return response;
-	}
-	private String calculTime(int time)
-	{
-		
-		int min=time/60000;
-		int sec=(time-(min*60000))/1000;
-		int mili=(time-(sec*1000)-(min*60000))/10;
-		//int milisec=
-		
-		
-		return min+"min"+sec+"sec"+mili;
-	}
+	}	
 
-	
-}	
-	
-	
-	
-	
+
+
+
 }
-	
-	
-	
-	
+
+
+

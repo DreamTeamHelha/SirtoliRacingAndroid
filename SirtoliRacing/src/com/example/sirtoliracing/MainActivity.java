@@ -15,17 +15,20 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import com.model.sirtoliracing.Joueur;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -106,6 +109,52 @@ public class MainActivity extends Activity {
 	
 	}
 	
+	public void rechercherRaceVocal(View view)
+	{
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+		RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speech to text");
+		startActivityForResult(intent, 1);
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1 && resultCode == RESULT_OK) {
+			ArrayList<String> matches = data.getStringArrayListExtra(
+					RecognizerIntent.EXTRA_RESULTS);
+			Log.v("Indice", matches.toString());
+			afficherScoreByVocal(matches);
+
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	public void afficherScoreByVocal(ArrayList<String>matches)
+	{
+		for(int i=0;i<matches.size();i++)
+		{
+			if(matches.get(i).equals("race 1"))
+			{
+				if(bCourse1.isEnabled())
+				bCourse1.performClick();
+				
+			}
+			if(matches.get(i).equals("race 2"))
+			{
+				if(bCourse2.isEnabled())
+				bCourse2.performClick();
+				
+			}
+			if(matches.get(i).equals("race 3"))
+			{
+				if(bCourse3.isEnabled())
+				bCourse3.performClick();
+				
+			}
+		}
+	}
+	
+	
 	public void afficherSuivant(View view)
 	{
 		
@@ -119,7 +168,9 @@ public class MainActivity extends Activity {
 				for(int i=0;i<3;i++)
 				{
 					listeButtons.get(i).setText(listeNameTracksShow.get(i).toString());	
+					
 					listeButtons.get(i).setVisibility(View.VISIBLE);
+					listeButtons.get(i).setEnabled(true);
 					depart=i;
 				}
 			}
@@ -128,11 +179,13 @@ public class MainActivity extends Activity {
 				for(int i=0;i<size;i++)
 				{
 					listeButtons.get(i).setText(listeNameTracksShow.get(depart+1).toString());
+					listeButtons.get(i).setEnabled(true);
 					depart++;
 				}
 				for(int i=size;i<3;i++)
 				{
 					listeButtons.get(i).setVisibility(View.GONE);
+					listeButtons.get(i).setEnabled(false);
 				}
 			}
 			
@@ -150,47 +203,50 @@ public class MainActivity extends Activity {
 	}
 	public void afficherPrecedent(View view)
 	{
-	
-		int size=listNametracks.size()-(depart);
-		int reste= listNametracks.size()-size;
 		
-		Log.v("NomButton",Integer.toString(reste));
-		if( reste>=3)
+		//recherche de la course precédente 
+		
+		int firstCurrentIndex= listeNameTracksShow.indexOf(listeButtons.get(0).getText());
+		
+		
+		Log.v("Previous","firstCurrent"+Integer.toString(firstCurrentIndex));
+		
+		int reste= (listNametracks.size()-1)-firstCurrentIndex;
+		
+		Log.v("Previous","reste  "+Integer.toString(reste));
+		int indice= firstCurrentIndex-1;
+		Log.v("Indice","indice a afficher" +Integer.toString(indice));
+		//partie ok ne pas toucher
+		if (firstCurrentIndex==0)
 		{
-			
-				
-				for(int i=3;i>0;i--)
-				{
-					listeButtons.get(i).setText(listeNameTracksShow.get(reste).toString());	
-					listeButtons.get(i).setVisibility(View.VISIBLE);
-					reste--;
-					
-				}
+			indice=listeNameTracksShow.size()-1;
 		}
-		/*	else
+		Log.v("Indice","indice a afficher"+Integer.toString(indice));
+		if(reste<3)
+		{
+			for(int i=0;i<reste;i++)
 			{
-				for(int i=depart;i<size;i--)
-				{
-					listeButtons.get(i).setText(listeNameTracksShow.get(depart+1).toString());
-					depart++;
-				}
-				for(int i=size;i<3;i++)
-				{
-					listeButtons.get(i).setVisibility(View.GONE);
-				}
+				listeButtons.get(i).setText(listeNameTracksShow.get(indice).toString());	
+				indice++;
 			}
-			
-			
+			for(int i=reste;i<3;i++)
+			{
+				listeButtons.get(i).setVisibility(View.GONE);
+			}
 		}
 		else
 		{
-			for(int i=0;i<3;i++)
-			{
-				listeButtons.get(i).setText(listeNameTracksShow.get(depart).toString());
+			
 				
-				depart++;
-			}
-		}*/
+				for(int i=0;i<3;i--)
+				{
+					listeButtons.get(i).setText(listeNameTracksShow.get(indice).toString());	
+					listeButtons.get(i).setVisibility(View.VISIBLE);
+					indice++;
+					
+				}
+		}
+		
 	}
 	
 	public int recoverTrack(String name_track)
