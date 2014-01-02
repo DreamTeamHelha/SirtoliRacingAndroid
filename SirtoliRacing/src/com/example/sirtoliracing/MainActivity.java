@@ -16,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
+
+
 import com.model.sirtoliracing.Joueur;
 
 import android.os.AsyncTask;
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
 	private String url_track="",name_Track="";
 	private ArrayList<String>listNametracks;
 	private ArrayList<String>listeNameTracksShow;
-	private Button bCourse1,bCourse2,bCourse3;
+	private Button bCourse1,bCourse2,bCourse3,bCourseNext,bCoursePrevious;
 	private ArrayList<Button>listeButtons;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class MainActivity extends Activity {
 		bCourse1=(Button)findViewById(R.id.button_Track1);
 		bCourse2=(Button)findViewById(R.id.button_Track2);
 		bCourse3=(Button)findViewById(R.id.button_Track3);
+		bCourseNext=(Button)findViewById(R.id.button_Next);
+		bCoursePrevious=(Button)findViewById(R.id.button_Previous);
 		listeButtons=new ArrayList<Button>();
 		listeButtons.add(bCourse1);
 		listeButtons.add(bCourse2);
@@ -151,6 +155,24 @@ public class MainActivity extends Activity {
 				bCourse3.performClick();
 				
 			}
+			if(matches.get(i).equals("next"))
+			{
+				if(bCourseNext.isEnabled())
+				bCourseNext.performClick();
+				
+			}
+			if(matches.get(i).equals("previous"))
+			{
+				if(bCoursePrevious.isEnabled())
+				bCoursePrevious.performClick();
+				
+			}
+			if(matches.get(i).equals("stop application"))
+			{
+				System.exit(0);
+				
+			}
+			
 		}
 	}
 	
