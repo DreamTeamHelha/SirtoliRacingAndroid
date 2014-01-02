@@ -21,6 +21,9 @@ import android.os.Bundle;
 import android.os.RecoverySystem;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -178,8 +181,12 @@ public class Score extends Activity {
 				for(int i=0;i<10;i++)
 				{
 					nameTab[i].setText(listeJoueurs.get(i).getName());
+					nameTab[i].setTypeface(null, Typeface.BOLD);
+					nameTab[i].setTextColor(Color.BLACK);
 					timing=calculTime(listeJoueurs.get(i).getScore());
 					timeTab[i].setText(timing);
+					timeTab[i].setTypeface(null, Typeface.BOLD);
+					timeTab[i].setTextColor(Color.BLACK);
 				}
 
 			}

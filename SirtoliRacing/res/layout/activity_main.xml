@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+	android:background="@drawable/fond"
     tools:context=".MainActivity" >
 
     <TextView
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="21dp"
+        android:textColor="@android:color/black"
         android:text="Choose your circuit" />
 
     <LinearLayout
@@ -37,19 +39,19 @@
         <Button
             android:id="@+id/button_Previous"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10.51"
+            android:layout_weight="1"
             android:onClick="afficherPrecedent"
             android:text="Previous" />
 
         <Button
             android:id="@+id/button_Next"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
-            android:layout_weight="10.51"
+            android:layout_weight="1"
             android:onClick="afficherSuivant"
             android:text="Next" />
     </LinearLayout>
