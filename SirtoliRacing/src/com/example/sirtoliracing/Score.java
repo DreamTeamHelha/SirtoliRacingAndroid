@@ -132,7 +132,13 @@ public class Score extends Activity {
 	}
 
 
-
+	@Override
+	public void onBackPressed()
+	{
+	     finish();
+	     
+	     
+	}
 
 
 
@@ -165,9 +171,22 @@ public class Score extends Activity {
 			// TODO Stub de la méthode généré automatiquement
 			Log.v("test",result);//verification check param ok
 			try {
+				int nombreJoueur;
 				listeJoueurs.clear();
+				
 				JSONArray array = new JSONArray(result);
-
+				
+				
+				if(array.length()>10)
+				{
+					nombreJoueur=10;
+				}
+				else
+				{
+					nombreJoueur=array.length();
+				}
+					
+				
 				for(int i = 0 ; i < array.length() ; i++){
 					JSONObject jsonobj =  array.getJSONObject(i);
 					String name= (String)jsonobj.get("Name");
@@ -178,15 +197,32 @@ public class Score extends Activity {
 				}
 				Collections.sort(listeJoueurs);
 				String timing;
-				for(int i=0;i<10;i++)
+				for(int i=0;i<nombreJoueur;i++)
 				{
-					nameTab[i].setText(listeJoueurs.get(i).getName());
-					nameTab[i].setTypeface(null, Typeface.BOLD);
-					nameTab[i].setTextColor(Color.BLACK);
-					timing=calculTime(listeJoueurs.get(i).getScore());
-					timeTab[i].setText(timing);
-					timeTab[i].setTypeface(null, Typeface.BOLD);
-					timeTab[i].setTextColor(Color.BLACK);
+					
+					
+						nameTab[i].setText(listeJoueurs.get(i).getName());
+						nameTab[i].setTypeface(null, Typeface.BOLD);
+						nameTab[i].setTextColor(Color.BLACK);
+						timing=calculTime(listeJoueurs.get(i).getScore());
+						timeTab[i].setText(timing);
+						timeTab[i].setTypeface(null, Typeface.BOLD);
+						timeTab[i].setTextColor(Color.BLACK);
+						
+						
+						
+					
+				}
+				if(nombreJoueur<10)
+				{
+					for(int i=nombreJoueur-1;i<10;i++)
+					{
+						if(timeTab[i].getText().equals("time"))
+						{
+							nameTab[i].setVisibility(View.GONE);
+							timeTab[i].setVisibility(View.GONE);
+						}
+					}
 				}
 
 			}
@@ -236,6 +272,8 @@ public class Score extends Activity {
 
 			return min+"min"+sec+"sec"+mili;
 		}
+		
+		
 
 
 	}	

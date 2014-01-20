@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 
 
+
 import com.model.sirtoliracing.Joueur;
 
 import android.net.ConnectivityManager;
@@ -74,6 +75,7 @@ public class MainActivity extends Activity {
 		}
 
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,6 +164,7 @@ public class MainActivity extends Activity {
 
 	public void afficherScoreByVocal(ArrayList<String>matches)
 	{
+		try{
 		for(int i=0;i<matches.size();i++)
 		{
 			if(matches.get(i).equals("race 1"))
@@ -190,8 +193,18 @@ public class MainActivity extends Activity {
 			}
 			if(matches.get(i).equals("previous"))
 			{
-				if(bCoursePrevious.isEnabled())
-					bCoursePrevious.performClick();
+				/*if(bCoursePrevious.isEnabled())
+					bCoursePrevious.performClick();*/
+				Toast toast = Toast.makeText(this, "previous", Toast.LENGTH_LONG);
+				toast.show();
+
+			}
+			if(matches.get(i).equals("previews"))
+			{
+				/*if(bCoursePrevious.isEnabled())
+					bCoursePrevious.performClick();*/
+				Toast toast = Toast.makeText(this, "previews", Toast.LENGTH_LONG);
+				toast.show();
 
 			}
 			if(matches.get(i).equals("stop application"))
@@ -207,8 +220,15 @@ public class MainActivity extends Activity {
 			}
 			
 			
+			
 
 		}
+		}
+		catch(Exception e)
+		{
+			Log.v("test", e.getMessage());
+		}
+		
 	}
 
 
@@ -260,7 +280,7 @@ public class MainActivity extends Activity {
 	}
 	public void afficherPrecedent(View view)
 	{
-
+		
 
 		//calcul de indice arraylist de la course en bouton 0 actuelement afficher
 		int firstCurrentIndex= listeNameTracksShow.indexOf(listeButtons.get(0).getText());
@@ -320,7 +340,7 @@ public class MainActivity extends Activity {
 
 			}
 		}
-
+	
 	}
 
 	private class RecoverTrack extends AsyncTask<Void, Void, String>
