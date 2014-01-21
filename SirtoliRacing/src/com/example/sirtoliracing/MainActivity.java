@@ -284,62 +284,71 @@ public class MainActivity extends Activity {
 
 		//calcul de indice arraylist de la course en bouton 0 actuelement afficher
 		int firstCurrentIndex= listeNameTracksShow.indexOf(listeButtons.get(0).getText());
-
+		Log.v("Indice","firstcurrent debut deuxieme"+Integer.toString(firstCurrentIndex));
 
 		Log.v("Previous","firstCurrent"+Integer.toString(firstCurrentIndex));
+		
+		
 
-		//calcul du reste de bouton a afficher
-		int reste= listNametracks.size()-3;
-
-		//calcul de l'indice , sert a trouver ce que l'on va afficher sur le bouton
-		int indice= firstCurrentIndex-1;
-
-		//Si en debut de liste , le bouton 0 correspond à la première course
-		if (firstCurrentIndex==0)
+		int nbAfficher;
+		if(firstCurrentIndex == 0)
 		{
-			indice=listeNameTracksShow.size()-1;
+			nbAfficher = listeNameTracksShow.size()%3;
+			Log.v("nb ","afficher"+Integer.toString(nbAfficher));
+			
+			if(nbAfficher == 0)
+				nbAfficher=3;
+			
 		}
-		//Si en fin de liste, correspond a la dernière course de la liste
-		if(firstCurrentIndex==(listeNameTracksShow.size()-1))
+		else
+			nbAfficher = 3;
+		
+		if(nbAfficher == 3)
 		{
-			//remise du reste au nombre de course -1
-			reste=listNametracks.size()-1;
-			//remise de l indice au nombre de course -2 , un pour indice reel et un pour le précédent
-			indice=listeNameTracksShow.size()-2;
-
-		}
-
-		//si il reste moins de 3 boutons à afficher
-		if(reste <3)
-		{
-
-			for(int i=0;i<reste;i++)
+			if(firstCurrentIndex == 0)
 			{
-				listeButtons.get(i).setEnabled(true);
-				listeButtons.get(i).setText(listeNameTracksShow.get(indice).toString());	
-				indice++;
-			}
-			for(int i=reste;i<3;i++)
-			{
-				listeButtons.get(i).setVisibility(View.GONE);
-				listeButtons.get(i).setEnabled(false);
-			}
-		}
-		//si il reste 3 boutons ou plus à afficher
-		if(reste>=3)
-		{
-
-
-			for(int i=2;i>=0;i--)
-			{
-				listeButtons.get(i).setEnabled(true);
-				listeButtons.get(i).setText(listeNameTracksShow.get(indice).toString());	
-				listeButtons.get(i).setVisibility(View.VISIBLE);
+				for (int i=1;i<=3;i++)
+				{
+					listeButtons.get(3-i).setText(listeNameTracksShow.get(listeNameTracksShow.size()-i).toString());
+					
+					firstCurrentIndex = listeNameTracksShow.size()-3;
+					
+					listeButtons.get(i-1).setEnabled(true);
+					listeButtons.get(i-1).setVisibility(View.VISIBLE);
+				}
 				
-				indice--;
-
+				
+			}
+			else
+			{
+				for (int i=1;i<=3;i++)
+				{
+					Log.v("i","i"+Integer.toString(i));
+					Log.v("Indice","firstcurrent"+Integer.toString(firstCurrentIndex));
+					listeButtons.get(3-i).setText(listeNameTracksShow.get(firstCurrentIndex-i).toString());
+					listeButtons.get(i-1).setEnabled(true);
+					listeButtons.get(i-1).setVisibility(View.VISIBLE);
+				}
+				firstCurrentIndex = firstCurrentIndex-3;
 			}
 		}
+		else
+		{
+			for (int i=1;i<=nbAfficher;i++)
+			{
+				listeButtons.get(nbAfficher-i).setText(listeNameTracksShow.get(listeNameTracksShow.size()-i).toString());
+			}
+			listeButtons.get(2).setEnabled(false);
+			listeButtons.get(2).setVisibility(View.GONE);
+			firstCurrentIndex = listeNameTracksShow.size()- nbAfficher;
+			Log.v("Indice","firstcurrent au premier tour"+Integer.toString(firstCurrentIndex));
+			if (nbAfficher==1)
+			{
+				listeButtons.get(1).setEnabled(false);
+				listeButtons.get(1).setVisibility(View.GONE);
+			}
+		}
+	
 	
 	}
 
@@ -379,7 +388,8 @@ public class MainActivity extends Activity {
 			{
 				Log.v("NomButton",e.getMessage());
 			}
-
+			
+			
 			super.onPostExecute(result);
 		}
 

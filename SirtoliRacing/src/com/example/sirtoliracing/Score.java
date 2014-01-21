@@ -106,9 +106,8 @@ public class Score extends Activity {
 		url_track="http://193.190.66.14:6080/SirtoliRacing/track/"+name_Track;	
 		raceName.setText(name_Track);
 
-
+	
 		recover= new RecoverInformation();
-
 		recover.execute(url_track);
 
 	}
@@ -143,19 +142,6 @@ public class Score extends Activity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	private class RecoverInformation extends AsyncTask<String, Void,String> {
 
 
@@ -171,20 +157,15 @@ public class Score extends Activity {
 			// TODO Stub de la méthode généré automatiquement
 			Log.v("test",result);//verification check param ok
 			try {
+				// nombre de joueur dans le json 
 				int nombreJoueur;
+				// timing
+				String timing;
 				listeJoueurs.clear();
 				
+				
 				JSONArray array = new JSONArray(result);
-				
-				
-				if(array.length()>10)
-				{
-					nombreJoueur=10;
-				}
-				else
-				{
-					nombreJoueur=array.length();
-				}
+			
 					
 				
 				for(int i = 0 ; i < array.length() ; i++){
@@ -196,7 +177,18 @@ public class Score extends Activity {
 
 				}
 				Collections.sort(listeJoueurs);
-				String timing;
+				
+				
+				if(array.length()>10)
+				{
+					nombreJoueur=10;
+				}
+				else
+				{
+					nombreJoueur=array.length();
+				}
+				Log.v("nbjoueur",Integer.toString(nombreJoueur));
+				
 				for(int i=0;i<nombreJoueur;i++)
 				{
 					
@@ -208,20 +200,20 @@ public class Score extends Activity {
 						timeTab[i].setText(timing);
 						timeTab[i].setTypeface(null, Typeface.BOLD);
 						timeTab[i].setTextColor(Color.BLACK);
-						
-						
-						
+				
 					
 				}
 				if(nombreJoueur<10)
 				{
-					for(int i=nombreJoueur-1;i<10;i++)
+					for(int i=nombreJoueur;i<10;i++)
 					{
-						if(timeTab[i].getText().equals("time"))
-						{
-							nameTab[i].setVisibility(View.GONE);
-							timeTab[i].setVisibility(View.GONE);
-						}
+						
+							nameTab[i].setText("");
+							timeTab[i].setText("");
+							
+							//nameTab[i].setVisibility(View.GONE);
+							//timeTab[i].setVisibility(View.GONE);
+						
 					}
 				}
 
